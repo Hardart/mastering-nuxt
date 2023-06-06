@@ -1,5 +1,5 @@
 <template>
-  <div class="course">
+  <div class="h-4">
     <slot />
   </div>
 </template>

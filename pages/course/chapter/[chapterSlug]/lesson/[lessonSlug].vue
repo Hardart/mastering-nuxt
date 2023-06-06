@@ -11,11 +11,19 @@
 <script setup>
 const { courseData } = useCourseData()
 const route = useRoute()
+definePageMeta({
+  middleware: ['route-validation', 'auth'],
+})
+
 const chapter = computed(() => courseData.chapters.find(ch => ch.slug === route.params.chapterSlug))
 const lesson = computed(() => chapter.value.lessons.find(less => less.slug === route.params.lessonSlug))
+
 const title = computed(() => `${lesson.value.title} - ${courseData.title}`)
+
 useHead({ title })
+
 const progress = useLocalStorage('lessonsProgress', [])
+
 const isLessonComplete = computed(() => {
   if (!progress.value[chapter.value.number - 1]) return false
   if (!progress.value[chapter.value.number - 1][lesson.value.number - 1]) return false

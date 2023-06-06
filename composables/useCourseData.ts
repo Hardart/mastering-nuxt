@@ -1,4 +1,4 @@
-import localData from '../courseLocalData'
+import { course, products } from './courseLocalData'
 type Chapter = {
   title: string
   slug: string
@@ -16,6 +16,7 @@ type Lesson = {
 
 export const useCourseData = () => {
   const lessons = (chapter: Chapter) => chapter.lessons.map(less => ({ ...less, path: `/course/chapter/${chapter.slug}/lesson/${less.slug}` }))
-  const chapters = localData.chapters.map(chapter => ({ ...chapter, lessons: lessons(chapter) }))
-  return { courseData: { ...localData, chapters } }
+  const chapters: Chapter[] = course.chapters.map(chapter => ({ ...chapter, lessons: lessons(chapter) }))
+  const firstLesson = chapters[0].lessons[0]
+  return { courseData: { ...course, chapters }, products, firstLesson }
 }

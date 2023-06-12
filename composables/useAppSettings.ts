@@ -1,4 +1,4 @@
-import { navigation } from './courseLocalData'
+import { navigation } from '~/localData'
 
 export const useAppSettings = () => {
   let isMenuInit = false

@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { DisclosureButton } from '@headlessui/vue'
 import { Bars3Icon } from '@heroicons/vue/24/outline'
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[calc(100vh-theme(space.16))]">
+  <div>
     <slot />
   </div>
 </template>

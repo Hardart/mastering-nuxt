@@ -1,22 +1,9 @@
-import { course, products } from './courseLocalData'
-type Chapter = {
-  title: string
-  slug: string
-  number: number
-  lessons: Lesson[]
-}
-type Lesson = {
-  number: number
-  title: string
-  slug: string
-  text: string
-  videoId?: number
-  path?: string
-}
+import { CourseMeta, OutlineLesson } from '~/types/course'
+import { products } from '~/localData'
 
-export const useCourseData = () => {
-  const lessons = (chapter: Chapter) => chapter.lessons.map(less => ({ ...less, path: `/course/chapter/${chapter.slug}/lesson/${less.slug}` }))
-  const chapters: Chapter[] = course.chapters.map(chapter => ({ ...chapter, lessons: lessons(chapter) }))
-  const firstLesson = chapters[0].lessons[0]
-  return { courseData: { ...course, chapters }, products, firstLesson }
+export const useCourseData = async () => {
+  const course = await useFetchWithCache<CourseMeta>('/api/course/meta')
+  const firstLesson: OutlineLesson = course.value.chapters[0].lessons[0]
+
+  return { course, products, firstLesson }
 }

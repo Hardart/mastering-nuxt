@@ -5,21 +5,21 @@
   </div>
   <VideoPlayer :video-id="lesson.videoId" />
   <p>{{ lesson.text }}</p>
-  <LessonCompleteButton @update:model-value="customError" :model-value="isLessonComplete" />
+  <LessonCompleteButton @update:model-value="toggleComplete" :model-value="isLessonComplete" />
 </template>
 
 <script setup>
-const { courseData } = useCourseData()
 const route = useRoute()
+const { chapterSlug, lessonSlug } = route.params
+const { course } = await useCourseData()
+const lesson = await useLesson(chapterSlug, lessonSlug)
 definePageMeta({
   middleware: ['route-validation', 'auth'],
 })
 
-const chapter = computed(() => courseData.chapters.find(ch => ch.slug === route.params.chapterSlug))
-const lesson = computed(() => chapter.value.lessons.find(less => less.slug === route.params.lessonSlug))
+const chapter = computed(() => course.value.chapters.find(ch => ch.slug === route.params.chapterSlug))
 
-const title = computed(() => `${lesson.value.title} - ${courseData.title}`)
-
+const title = computed(() => `${lesson.value.title} - ${course.value.title}`)
 useHead({ title })
 
 const progress = useLocalStorage('lessonsProgress', [])
@@ -34,6 +34,7 @@ const toggleComplete = () => {
   if (!progress.value[chapter.value.number - 1]) progress.value[chapter.value.number - 1] = []
   progress.value[chapter.value.number - 1][lesson.value.number - 1] = !isLessonComplete.value
 }
+
 const customError = () => {
   throw createError('some Errrorrr!!')
 }

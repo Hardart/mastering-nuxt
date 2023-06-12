@@ -4,14 +4,13 @@
       <div class="relative flex h-16 items-center justify-between">
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
           <MenuToggleButton />
-          <div class="flex flex-shrink-0 items-center">
-            <img class="h-7 w-auto block" src="/logo.svg" alt="Your Company" />
-          </div>
+          <Logo />
           <MenuMain />
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-          <MenuNotficationButton />
-          <MenuProfile />
+          <MenuNotficationButton v-if="isLogin" />
+          <MenuProfile v-if="isLogin" />
+          <NuxtLink to="/login" v-else class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" active-class="bg-gray-900 text-white">Login</NuxtLink>
         </div>
       </div>
     </div>
@@ -19,8 +18,9 @@
   </Disclosure>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { Disclosure } from '@headlessui/vue'
 
-const { nav: navigation, setActiveMenuItem } = useAppSettings()
+const { nav: navigation } = useAppSettings()
+const { isLogin } = useUserData()
 </script>

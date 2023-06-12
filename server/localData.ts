@@ -157,5 +157,4 @@ export const navigation = [
   { id: 1, name: 'Home', href: '/', current: true },
   { id: 2, name: 'Course', href: '/course', current: false },
   { id: 3, name: 'Contacts', href: '/contacts', current: false },
-  { id: 4, name: 'Login', href: '/login', current: false },
 ]

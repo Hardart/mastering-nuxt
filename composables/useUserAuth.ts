@@ -7,6 +7,7 @@ export const useUserAuth = () => {
     const { error } = await auth.signInWithOAuth({ provider: 'github', options: { redirectTo } })
     if (error) console.error(error)
   }
+
   const logout = async () => {
     const { error } = await auth.signOut()
     if (error) return console.error(error)

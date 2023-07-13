@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */
+import type { Config } from 'tailwindcss'
 module.exports = {
   content: ['./pages/**/*.vue', './components/**/*.vue'],
   theme: {
@@ -14,4 +14,4 @@ module.exports = {
     },
   },
   plugins: [require('@tailwindcss/typography'), require('@tailwindcss/aspect-ratio')],
-}
+} satisfies Config

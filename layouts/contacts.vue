@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-slate-400">
+  <div class="contacts">
     <slot />
   </div>
 </template>

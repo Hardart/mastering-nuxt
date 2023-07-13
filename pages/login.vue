@@ -1,11 +1,11 @@
 <template>
   <NuxtLayout>
-    <NuxtLayout name="section" color="secondary">
+    <Section color="secondary">
       <h1 class="text-4xl mb-8">
         Log in to <span class="font-bold">{{ firstLesson.title }}</span>
       </h1>
-      <button class="btn-primary" @click="login">Login with GitHub</button>
-    </NuxtLayout>
+      <button class="btn btn-primary" @click="login">Login with GitHub</button>
+    </Section>
   </NuxtLayout>
 </template>
 
@@ -16,9 +16,9 @@ definePageMeta({
 const { firstLesson } = await useCourseData()
 const { login } = useUserAuth()
 const { query } = useRoute()
-const { isLogin } = useUserData()
+const user = useSupabaseUser()
 watchEffect(async () => {
-  if (!isLogin.value) return
+  if (!user.value) return
   await navigateTo(query.redirectTo as string, { replace: true })
 })
 </script>

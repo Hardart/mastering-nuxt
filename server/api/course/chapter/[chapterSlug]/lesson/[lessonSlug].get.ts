@@ -1,18 +1,29 @@
-import { Chapter, Course, Lesson, LessonWithPath } from '../../../../../../types/course'
-import { course } from '../../../../../localData'
-course as Course
+import { PrismaClient } from '@prisma/client'
 
-export default defineEventHandler((event): LessonWithPath => {
+const prisma = new PrismaClient()
+
+export default defineEventHandler(async event => {
   const { params } = event.context
 
-  const chapter: Maybe<Chapter> = course.chapters.find(ch => ch.slug === params?.chapterSlug)
-  if (!chapter) {
-    throw createError({
-      statusCode: 404,
-      message: 'Chapter is not found',
-    })
+  if (params?.chapterSlug !== '1-chapter-1') {
+    checkAuth(event)
   }
-  const lesson: Maybe<Lesson> = chapter.lessons.find(less => less.slug === params?.lessonSlug)
+
+  const lesson = await prisma.lesson.findFirst({
+    where: {
+      slug: params?.lessonSlug,
+      Chapter: {
+        slug: params?.chapterSlug,
+      },
+    },
+    select: {
+      title: true,
+      slug: true,
+      number: true,
+      videoId: true,
+      text: true,
+    },
+  })
 
   if (!lesson) {
     throw createError({
@@ -21,5 +32,5 @@ export default defineEventHandler((event): LessonWithPath => {
     })
   }
 
-  return { ...lesson, path: `course/chapter/${params?.chapterSlug}/lesson/${params?.lessonSlug}` }
+  return { ...lesson, path: `/api/course/chapter/${params?.chapterSlug}/lesson/${params?.lessonSlug}` }
 })

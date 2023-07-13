@@ -1,8 +1,8 @@
 <template>
   <NuxtLayout name="contacts">
-    <NuxtLayout name="section" color="secondary">
+    <Section color="primary">
       <h1 class="text-4xl">{{ $route.name }}</h1>
-    </NuxtLayout>
+    </Section>
   </NuxtLayout>
 </template>
 

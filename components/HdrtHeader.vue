@@ -8,9 +8,10 @@
           <MenuMain />
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-          <MenuNotficationButton v-if="isLogin" />
-          <MenuProfile v-if="isLogin" />
-          <NuxtLink to="/login" v-else class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" active-class="bg-gray-900 text-white">Login</NuxtLink>
+          <!-- <UiLoading class="h-4 w-4" v-if="user" /> -->
+          <MenuNotficationButton v-if="user" />
+          <MenuProfile v-if="user" />
+          <NuxtLink to="/login" v-if="!user" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" active-class="bg-gray-900 text-white">Login</NuxtLink>
         </div>
       </div>
     </div>
@@ -18,9 +19,10 @@
   </Disclosure>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { Disclosure } from '@headlessui/vue'
 
 const { nav: navigation } = useAppSettings()
-const { isLogin } = useUserData()
+
+const user = useSupabaseUser()
 </script>

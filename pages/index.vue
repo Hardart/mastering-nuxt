@@ -25,30 +25,11 @@
     <h2 class="font-black tracking-wide text-slate-900 text-3xl mb-16 text-center">Screenshots</h2>
     <Slider :images-list="screenshots" />
   </Section>
-  <Section color="secondary">
-    <div class="grid grid-cols-4 prose-h4:text-lg prose-h4:tracking-wider">
-      <Logo size="h-11" />
-      <div class="flex">
-        <h4>Address:</h4>
-      </div>
-      <div class="flex">
-        <h4>Phones:</h4>
-      </div>
-      <div class="flex">
-        <h4>Social:</h4>
-      </div>
-    </div>
-  </Section>
+  <Footer />
   <ModalBuyCourse :is-open="open" :set-is-open="close" />
 </template>
 
 <script setup>
-useHead({
-  script: [
-    { src: 'https://cdnjs.cloudflare.com/ajax/libs/uikit/3.16.21/js/components/slider.min.js', tagPosition: 'bodyClose', defer: true },
-    { src: 'https://cdnjs.cloudflare.com/ajax/libs/uikit/3.16.21/js/components/slider-parallax.min.js', tagPosition: 'bodyClose', defer: true },
-  ],
-})
 import image1 from '~/assets/images/screen1.png'
 import image2 from '~/assets/images/screen2.png'
 import image3 from '~/assets/images/screen3.png'

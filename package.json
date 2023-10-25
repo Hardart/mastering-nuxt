@@ -15,6 +15,7 @@
   "devDependencies": {
     "@headlessui/vue": "^1.7.14",
     "@heroicons/vue": "^2.0.18",
+    "@nuxt/devtools": "^0.8.5",
     "@nuxtjs/supabase": "^0.3.6",
     "@nuxtjs/tailwindcss": "^6.7.0",
     "@pinia/nuxt": "^0.4.11",
@@ -28,6 +29,7 @@
     "prisma": "^4.15.0"
   },
   "dependencies": {
-    "@prisma/client": "^4.15.0"
+    "@prisma/client": "^4.15.0",
+    "nuxt-icon": "^0.5.0"
   }
 }
